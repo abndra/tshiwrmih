@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حاسبة عربية</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background: #000;
+      color: #fff;
+      transition: background 0.3s, color 0.3s;
+    }
+    .light-mode {
+      background: #fff;
+      color: #000;
+    }
+    .top-bar {
+      width: 100%;
+      text-align: left;
+      padding: 10px;
+      box-sizing: border-box;
+      max-width: 400px;
+    }
+    #toggle-mode {
+      cursor: pointer;
+      padding: 6px 12px;
+      border: 2px solid #FF0000;
+      background: #000;
+      color: #FF0000;
+      font-size: 14px;
+      border-radius: 5px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .light-mode #toggle-mode {
+      background: #fff;
+      color: #FF0000;
+    }
+    .calculator {
+      border: 2px solid #FF0000;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 0 10px 2px #FF0000;
+      transition: box-shadow 0.3s;
+    }
+    .light-mode .calculator {
+      box-shadow: 0 0 10px 2px #aaa;
+      border-color: #000;
+    }
+    .display {
+      width: 100%;
+      background: #333;
+      color: #FF0000;
+      font-size: 24px;
+      padding: 10px;
+      border: none;
+      text-align: right;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      transition: background 0.3s, color 0.3s;
+    }
+    .light-mode .display {
+      background: #ccc;
+      color: #000;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .button {
+      background: #000;
+      border: 2px solid #FF0000;
+      color: #FF0000;
+      font-size: 18px;
+      padding: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .button:hover {
+      background: #FF0000;
+      color: #000;
+      transform: scale(1.05);
+    }
+    .button:active {
+      transform: scale(0.95);
+    }
+    .light-mode .button {
+      background: #fff;
+      border: 2px solid #000;
+      color: #000;
+    }
+    .light-mode .button:hover {
+      background: #000;
+      color: #fff;
+    }
+    .wide {
+      grid-column: span 2;
+    }
+    .history {
+      margin-top: 15px;
+      background: #111;
+      border: 2px solid #FF0000;
+      border-radius: 5px;
+      padding: 10px;
+      max-height: 150px;
+      overflow-y: auto;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+    .light-mode .history {
+      background: #f0f0f0;
+      border-color: #000;
+      color: #000;
+    }
+    .history-item {
+      border-bottom: 1px dashed #FF0000;
+      padding: 5px 0;
+    }
+    .light-mode .history-item {
+      border-bottom: 1px dashed #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <button id="toggle-mode">الوضع الليلي/النهاري</button>
+  </div>
+  <div class="calculator">
+    <input type="text" class="display" id="calc-display" readonly>
+    <div class="buttons">
+      <button class="button" id="mc">MC</button>
+      <button class="button" id="mr">MR</button>
+      <button class="button" id="mplus">M+</button>
+      <button class="button" id="mminus">M-</button>
+      <button class="button" id="ms">MS</button>
+
+      <button class="button" data-value="%">٪</button>
+      <button class="button" id="ce">CE</button>
+      <button class="button" id="clear">C</button>
+      <button class="button" id="backspace">⌫</button>
+      <button class="button" data-value="/">÷</button>
+
+      <button class="button" data-value="7">٧</button>
+      <button class="button" data-value="8">٨</button>
+      <button class="button" data-value="9">٩</button>
+      <button class="button" data-value="*">×</button>
+      <button class="button" id="square">x²</button>
+
+      <button class="button" data-value="4">٤</button>
+      <button class="button" data-value="5">٥</button>
+      <button class="button" data-value="6">٦</button>
+      <button class="button" data-value="-">−</button>
+      <button class="button" id="sqrt">√</button>
+
+      <button class="button" data-value="1">١</button>
+      <button class="button" data-value="2">٢</button>
+      <button class="button" data-value="3">٣</button>
+      <button class="button" data-value="+">+</button>
+      <button class="button" id="frac">1/x</button>
+
+      <button class="button" id="sign">±</button>
+      <button class="button" data-value="0">٠</button>
+      <button class="button" data-value=".">.</button>
+      <button class="button" id="equal">=</button>
+      <button class="button" data-value="^">^</button>
+    </div>
+    <div class="history" id="history"></div>
+  </div>
+  <script>
+    const toggleModeBtn = document.getElementById('toggle-mode');
+    toggleModeBtn.addEventListener('click', ()=>{
+      document.body.classList.toggle('light-mode');
+    });
+
+    const display = document.getElementById('calc-display');
+    const buttons = document.querySelectorAll('.button[data-value]');
+    const ceBtn = document.getElementById('ce');
+    const clearBtn = document.getElementById('clear');
+    const backspaceBtn = document.getElementById('backspace');
+    const equalBtn = document.getElementById('equal');
+    const squareBtn = document.getElementById('square');
+    const sqrtBtn = document.getElementById('sqrt');
+    const fracBtn = document.getElementById('frac');
+    const signBtn = document.getElementById('sign');
+    const historyDiv = document.getElementById('history');
+    let historyArr = [];
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        display.value += button.getAttribute('data-value');
+      });
+    });
+
+    ceBtn.addEventListener('click', () => {
+      display.value = '';
+    });
+
+    clearBtn.addEventListener('click', () => {
+      display.value = '';
+      historyArr = [];
+      historyDiv.innerHTML = '';
+    });
+
+    backspaceBtn.addEventListener('click', () => {
+      display.value = display.value.slice(0, -1);
+    });
+
+    squareBtn.addEventListener('click', () => {
+      if(display.value){
+        let val = parseFloat(display.value);
+        display.value = Math.pow(val, 2);
+      }
+    });
+
+    sqrtBtn.addEventListener('click', () => {
+      if(display.value){
+        let val = parseFloat(display.value);
+        display.value = Math.sqrt(val);
+      }
+    });
+
+    fracBtn.addEventListener('click', () => {
+      if(display.value){
+        let val = parseFloat(display.value);
+        if(val !== 0) display.value = 1 / val;
+      }
+    });
+
+    signBtn.addEventListener('click', () => {
+      if(display.value){
+        let val = parseFloat(display.value);
+        display.value = -val;
+      }
+    });
+
+    equalBtn.addEventListener('click', () => {
+      try {
+        let expression = display.value;
+        expression = expression.replace(/([\d.]+)\^([\d.]+)/g, 'Math.pow($1,$2)');
+        expression = expression.replace(/%/g, '/100');
+        let result = eval(expression);
+        historyArr.push(display.value + " = " + result);
+        updateHistory();
+        display.value = result;
+      } catch(e) {
+        display.value = "خطأ";
+      }
+    });
+
+    function updateHistory() {
+      historyDiv.innerHTML = historyArr.slice(-5)
+        .map(item => '<div class="history-item">' + item + '</div>')
+        .join('');
+    }
+  </script>
+</body>
+</html>

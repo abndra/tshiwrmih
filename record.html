@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سجل المنتجات</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: url("2.jpg") no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: #FF0000;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+      color: #FF0000;
+      text-shadow: 0 0 5px #000;
+    }
+    #controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    #controls input, #controls select, #controls button {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background: #111;
+      color: #FF0000;
+    }
+    #controls button:hover {
+      background: #333;
+      cursor: pointer;
+    }
+    #reportsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .report-group {
+      background: #222;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    .report-group h3 {
+      margin-top: 0;
+      color: #FF0000;
+      text-align: center;
+      border-bottom: 1px solid #FF0000;
+      padding-bottom: 5px;
+    }
+    .record-card {
+      background: #000;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    }
+    .record-info {
+      flex: 1;
+    }
+    .record-info p {
+      margin: 5px 0;
+    }
+    .record-info p strong {
+      min-width: 120px;
+      display: inline-block;
+    }
+    .edit-btn {
+      background: #FF0000;
+      color: #000;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .edit-btn:hover {
+      background: #cc0000;
+    }
+    /* زر إصدار الأحصائيات */
+    #statsButton {
+      background: #FF0000;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #statsButton:hover {
+      background: #cc0000;
+    }
+    /* نافذة اختيار التاريخ لإصدار الأحصائيات */
+    #statsFilterModal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    #statsFilterModal .modal-content {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+    }
+    #statsFilterModal select, #statsFilterModal button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background: #111;
+      color: #FF0000;
+    }
+    #statsFilterModal button:hover {
+      background: #333;
+      cursor: pointer;
+    }
+    /* نافذة عرض الإحصائيات */
+    #statsModal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+    }
+    #statsModal .stats-modal-content {
+      background: #000;
+      border: 2px solid #FF0000;
+      padding: 20px;
+      border-radius: 10px;
+      color: #FF0000;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+    }
+    #statsModal table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    #statsModal table, #statsModal th, #statsModal td {
+      border: 1px solid #FF0000;
+    }
+    #statsModal th, #statsModal td {
+      padding: 8px;
+      text-align: center;
+    }
+    #statsModal th {
+      background: #222;
+    }
+    #closeStatsModal {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #FF0000;
+    }
+  </style>
+</head>
+<body>
+  <h2>سجل المنتجات</h2>
+  <div id="controls">
+    <input type="text" id="searchInput" placeholder="ابحث بالاسم أو الكود">
+    <select id="yearFilter">
+      <option value="">اختر السنة</option>
+      <option value="2025">2025</option>
+      <option value="2026">2026</option>
+      <option value="2027">2027</option>
+      <option value="2028">2028</option>
+      <option value="2029">2029</option>
+      <option value="2030">2030</option>
+      <option value="2031">2031</option>
+      <option value="2032">2032</option>
+      <option value="2033">2033</option>
+      <option value="2034">2034</option>
+      <option value="2035">2035</option>
+      <option value="2036">2036</option>
+      <option value="2037">2037</option>
+      <option value="2038">2038</option>
+      <option value="2039">2039</option>
+      <option value="2040">2040</option>
+      <option value="2041">2041</option>
+      <option value="2042">2042</option>
+      <option value="2043">2043</option>
+      <option value="2044">2044</option>
+      <option value="2045">2045</option>
+      <option value="2046">2046</option>
+      <option value="2047">2047</option>
+      <option value="2048">2048</option>
+      <option value="2049">2049</option>
+      <option value="2050">2050</option>
+    </select>
+    <button id="filterButton">تصفية</button>
+    <button id="clearFilterButton">إزالة التصفية</button>
+    <button id="toggleOrder">عرض الأقدم أولاً</button>
+    <button id="statsButton">إصدار الأحصائيات</button>
+  </div>
+  <div id="reportsContainer"></div>
+  
+  <!-- نافذة اختيار السنة والشهر لإصدار الأحصائيات -->
+  <div id="statsFilterModal">
+    <div class="modal-content">
+      <h3>اختر الشهر والسنة</h3>
+      <select id="exportYear">
+        <option value="">اختر السنة</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+        <option value="2029">2029</option>
+        <option value="2030">2030</option>
+        <option value="2031">2031</option>
+        <option value="2032">2032</option>
+        <option value="2033">2033</option>
+        <option value="2034">2034</option>
+        <option value="2035">2035</option>
+        <option value="2036">2036</option>
+        <option value="2037">2037</option>
+        <option value="2038">2038</option>
+        <option value="2039">2039</option>
+        <option value="2040">2040</option>
+        <option value="2041">2041</option>
+        <option value="2042">2042</option>
+        <option value="2043">2043</option>
+        <option value="2044">2044</option>
+        <option value="2045">2045</option>
+        <option value="2046">2046</option>
+        <option value="2047">2047</option>
+        <option value="2048">2048</option>
+        <option value="2049">2049</option>
+        <option value="2050">2050</option>
+      </select>
+      <select id="exportMonth">
+        <option value="">اختر الشهر</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      <button id="generateStats">عرض الأحصائيات</button>
+      <button id="cancelStats">إلغاء</button>
+    </div>
+  </div>
+  
+  <!-- نافذة عرض الإحصائيات -->
+  <div id="statsModal">
+    <div class="stats-modal-content">
+      <span id="closeStatsModal">×</span>
+      <div id="statsContent"></div>
+    </div>
+  </div>
+  
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+    import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+    const firebaseConfig = { 
+      apiKey: "AIzaSyBTkxX-GMj8GtZ-t6-626WqB5PV2AWxQS8", 
+      authDomain: "tshiwrmih-49a42.firebaseapp.com", 
+      databaseURL: "https://tshiwrmih-49a42-default-rtdb.firebaseio.com", 
+      projectId: "tshiwrmih-49a42", 
+      storageBucket: "tshiwrmih-49a42.appspot.com", 
+      messagingSenderId: "576466206031", 
+      appId: "1:576466206031:web:55d1b24221a41a11bc593a", 
+      measurementId: "G-MY6EVZ6LB5" 
+    };
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getDatabase(app);
+    
+    const reportsContainer = document.getElementById("reportsContainer");
+    const searchInput = document.getElementById("searchInput");
+    const yearFilter = document.getElementById("yearFilter");
+    const filterButton = document.getElementById("filterButton");
+    const clearFilterButton = document.getElementById("clearFilterButton");
+    const toggleOrderBtn = document.getElementById("toggleOrder");
+    const statsButton = document.getElementById("statsButton");
+    const statsFilterModal = document.getElementById("statsFilterModal");
+    const generateStatsBtn = document.getElementById("generateStats");
+    const cancelStatsBtn = document.getElementById("cancelStats");
+    const statsModal = document.getElementById("statsModal");
+    const closeStatsModal = document.getElementById("closeStatsModal");
+    
+    let allRecords = [];
+    let orderAsc = false;
+    
+    async function fetchRecords() {
+      try {
+        const snapshot = await get(ref(db, 'Data2'));
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          let records = [];
+          for (const year in data) {
+            for (const month in data[year]) {
+              for (const day in data[year][month]) {
+                for (const recordId in data[year][month][day]) {
+                  let record = data[year][month][day][recordId];
+                  record.year = year;
+                  record.month = month;
+                  record.day = day;
+                  record.reportDate = `${year}/${month}/${day}`;
+                  record.recordId = recordId;
+                  records.push(record);
+                }
+              }
+            }
+          }
+          allRecords = records;
+          renderRecords(allRecords);
+        } else {
+          reportsContainer.innerHTML = "<p>لا توجد بيانات.</p>";
+        }
+      } catch (error) {
+        console.error(error);
+        alert("حدث خطأ أثناء جلب البيانات");
+      }
+    }
+    
+    function renderRecords(records) {
+      records.sort((a, b) => {
+        const dateA = new Date(a.creationTime) || new Date(a.reportDate);
+        const dateB = new Date(b.creationTime) || new Date(b.reportDate);
+        return orderAsc ? dateA - dateB : dateB - dateA;
+      });
+      const grouped = {};
+      records.forEach(record => {
+        const groupKey = record.reportDate || "غير محدد";
+        if (!grouped[groupKey]) grouped[groupKey] = [];
+        grouped[groupKey].push(record);
+      });
+      reportsContainer.innerHTML = "";
+      for (const group in grouped) {
+        const groupDiv = document.createElement("div");
+        groupDiv.className = "report-group";
+        const header = document.createElement("h3");
+        header.textContent = "تقارير " + group;
+        groupDiv.appendChild(header);
+        grouped[group].forEach(record => {
+          const card = renderRecordCard(record);
+          groupDiv.appendChild(card);
+        });
+        reportsContainer.appendChild(groupDiv);
+      }
+    }
+    
+    function renderRecordCard(record) {
+      const card = document.createElement("div");
+      card.className = "record-card";
+      card.innerHTML = `
+        <div class="record-info">
+          <p><strong>اسم المنتج:</strong> ${record.productName || ""}</p>
+          <p><strong>رقم المنتج:</strong> ${record.productId || ""}</p>
+          <p><strong>عدد الكمية:</strong> ${record.quantity || ""}</p>
+          <p><strong>وقت الإنشاء:</strong> ${record.creationTime || ""}</p>
+        </div>
+        <button class="edit-btn" data-recordid="${record.recordId}" data-reportdate="${record.reportDate}">تعديل</button>
+      `;
+      const editBtn = card.querySelector(".edit-btn");
+      editBtn.addEventListener("click", () => {
+        const newQuantity = prompt("أدخل الكمية الجديدة:", record.quantity);
+        if (newQuantity && !isNaN(newQuantity)) {
+          updateRecord(record.reportDate, record.recordId, newQuantity);
+        }
+      });
+      return card;
+    }
+    
+    async function updateRecord(reportDate, recordId, newQuantity) {
+      try {
+        await update(ref(db, `Data2/${reportDate.split('/').join('/')}/${recordId}`), { 
+          quantity: newQuantity, 
+          modificationTime: new Date().toLocaleString("ar-EG") 
+        });
+        alert("تم تحديث البيانات بنجاح");
+        fetchRecords();
+      } catch (error) {
+        console.error(error);
+        alert("حدث خطأ أثناء تحديث البيانات");
+      }
+    }
+    
+    function applyFilters() {
+      let filtered = allRecords;
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      if (searchTerm) {
+        filtered = filtered.filter(r =>
+          (r.productName && r.productName.toLowerCase().includes(searchTerm)) ||
+          (r.productId && r.productId.toString().toLowerCase().includes(searchTerm))
+        );
+      }
+      const selectedYear = yearFilter.value;
+      if (selectedYear) {
+        filtered = filtered.filter(r => r.year === selectedYear);
+      }
+      renderRecords(filtered);
+    }
+    
+    filterButton.addEventListener("click", applyFilters);
+    clearFilterButton.addEventListener("click", () => {
+      searchInput.value = "";
+      yearFilter.value = "";
+      renderRecords(allRecords);
+    });
+    toggleOrderBtn.addEventListener("click", () => {
+      orderAsc = !orderAsc;
+      toggleOrderBtn.textContent = orderAsc ? "عرض الأحدث أولاً" : "عرض الأقدم أولاً";
+      renderRecords(allRecords);
+    });
+    
+    // فتح نافذة اختيار التاريخ لعرض الإحصائيات
+    statsButton.addEventListener("click", () => {
+      statsFilterModal.style.display = "flex";
+    });
+    cancelStatsBtn.addEventListener("click", () => {
+      statsFilterModal.style.display = "none";
+    });
+    
+    generateStatsBtn.addEventListener("click", () => {
+      const exportYear = document.getElementById("exportYear").value;
+      const exportMonth = document.getElementById("exportMonth").value;
+      if (!exportYear) {
+        alert("يجب اختيار السنة على الأقل");
+        return;
+      }
+      let filtered = allRecords.filter(r => r.year === exportYear);
+      if (exportMonth) {
+        filtered = filtered.filter(r => r.month === exportMonth);
+      }
+      if (filtered.length === 0) {
+        alert("لا توجد بيانات للتقرير حسب التاريخ المحدد");
+        return;
+      }
+      // تجميع البيانات حسب المنتج
+      const aggregated = {};
+      filtered.forEach(r => {
+        const key = r.productId || r.productName;
+        if (!aggregated[key]) {
+          aggregated[key] = { productName: r.productName || "", productId: r.productId || "", totalQuantity: 0, totalPrice: 0 };
+        }
+        aggregated[key].totalQuantity += parseFloat(r.quantity) || 0;
+        aggregated[key].totalPrice += parseFloat(r.price) || 0;
+      });
+      showStatistics(aggregated);
+      statsFilterModal.style.display = "none";
+    });
+    
+    function showStatistics(aggregatedData) {
+      // حساب العدد الكلي للمنتجات ومجموع الأسعار
+      const totalProducts = Object.keys(aggregatedData).length;
+      let totalPriceAll = 0;
+      for (const key in aggregatedData) {
+        totalPriceAll += aggregatedData[key].totalPrice;
+      }
+      
+      let html = `<p style="font-size:18px; font-weight:bold;">عدد المنتجات الكلي : ${totalProducts}</p>`;
+      html += `<p style="font-size:18px; font-weight:bold;">السعر الكلي للمنتجات : ${totalPriceAll}</p>`;
+      html += `<table>
+                 <tr>
+                   <th>عدد الكمية</th>
+                   <th>سعر الكمية</th>
+                   <th>اسم المنتج</th>
+                 </tr>`;
+      for (const key in aggregatedData) {
+        const item = aggregatedData[key];
+        html += `<tr>
+                   <td>${item.totalQuantity}</td>
+                   <td>${item.totalPrice}</td>
+                   <td>${item.productName}</td>
+                 </tr>`;
+      }
+      html += `</table>`;
+      
+      document.getElementById("statsContent").innerHTML = html;
+      statsModal.style.display = "flex";
+    }
+    
+    closeStatsModal.addEventListener("click", () => {
+      statsModal.style.display = "none";
+    });
+    
+    fetchRecords();
+  </script>
+</body>
+</html>

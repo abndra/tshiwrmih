@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+<img id="image" src="3.jpg" alt="3.jpg" style="position: absolute; top: 20px; right: 50px; width: 100px; transform: scale(1.9); z-index: 1000; transition: top 0.5s;">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سجل العلاج النفسي للحالات</title>
+    <link rel="icon" type="image/jpeg" href="2.jpg" />
+    <link rel="preload" href="1.jpg" as="image" />
+    <link rel="preload" href="return.png" as="image" />
+    <link rel="preconnect" href="https://www.gstatic.com" />
+    <link rel="preconnect" href="https://www.googleapis.com" />
+    <style>
+      .typewriter {
+        --blue: #5cbbff;
+        --blue-dark: #162d72;
+        --key: #fff;
+        --paper: #eef0fd;
+        --text: #368B75;
+        --tool: #67FFCD;
+        --duration: 3s;
+        position: relative;
+        animation: bounce05 var(--duration) linear infinite;
+      }
+      .typewriter .slide {
+        width: 92px;
+        height: 20px;
+        border-radius: 3px;
+        margin-left: 14px;
+        transform: translateX(14px);
+        background: linear-gradient(var(--blue), var(--blue-dark));
+        animation: slide05 var(--duration) ease infinite;
+      }
+      .typewriter .slide:before,
+      .typewriter .slide:after,
+      .typewriter .slide i:before {
+        content: "";
+        position: absolute;
+        background: var(--tool);
+      }
+      .typewriter .slide:before {
+        width: 2px;
+        height: 8px;
+        top: 6px;
+        left: 100%;
+      }
+      .typewriter .slide:after {
+        left: 94px;
+        top: 3px;
+        height: 14px;
+        width: 6px;
+        border-radius: 3px;
+      }
+      .typewriter .slide i {
+        display: block;
+        position: absolute;
+        right: 100%;
+        width: 6px;
+        height: 4px;
+        top: 4px;
+        background: var(--tool);
+      }
+      :root {
+  --primary-color: #368B75;
+  --secondary-yellow: #FFCD67;
+  --secondary-purple: #5B417B;
+  --secondary-orange: #F89F6D;
+  --secondary-grey: #58595B;
+  --primary-palette: #EBF3F1, #D7E8E3, #C3DCD6, #AFD1C8, #9BC5BA, #86B9AC, #72AE9E, #5EA291;
+}
+
+body {
+  background-color: var(--primary-color);
+  font-family: 'Sakkal Majalla', sans-serif;
+}
+
+h2 {
+  color: var(--secondary-purple);
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 800;
+}
+
+button {
+  background-color: var(--secondary-orange);
+  color: var(--secondary-grey);
+  font-family: 'Tajawal', sans-serif;
+}
+      .typewriter .slide i:before {
+        right: 100%;
+        top: -2px;
+        width: 4px;
+        border-radius: 2px;
+        height: 14px;
+      }
+      .typewriter .paper {
+        position: absolute;
+        left: 24px;
+        top: -26px;
+        width: 40px;
+        height: 46px;
+        border-radius: 5px;
+        background: var(--paper);
+        transform: translateY(46px);
+        animation: paper05 var(--duration) linear infinite;
+      }
+      .typewriter .keyboard {
+        width: 120px;
+        height: 56px;
+        margin-top: -10px;
+        z-index: 1;
+        position: relative;
+      }
+      .typewriter .keyboard:before,
+      .typewriter .keyboard:after {
+        content: "";
+        position: absolute;
+      }
+      .typewriter .keyboard:before {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 7px;
+        background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+        transform: perspective(10px) rotateX(2deg);
+        transform-origin: 50% 100%;
+      }
+      .typewriter .keyboard:after {
+        left: 2px;
+        top: 25px;
+        width: 11px;
+        height: 4px;
+        border-radius: 2px;
+        box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key),
+          45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key),
+          90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key),
+          52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key),
+          83px 10px 0 var(--key);
+        animation: keyboard05 var(--duration) linear infinite;
+      }
+      @keyframes bounce05 {
+        85%,
+        92%,
+        100% {
+          transform: translateY(0);
+        }
+        89% {
+          transform: translateY(-4px);
+        }
+        95% {
+          transform: translateY(2px);
+        }
+      }
+      @keyframes slide05 {
+        5% {
+          transform: translateX(14px);
+        }
+        15%,
+        30% {
+          transform: translateX(6px);
+        }
+        40%,
+        55% {
+          transform: translateX(0);
+        }
+        65%,
+        70% {
+          transform: translateX(-4px);
+        }
+        80%,
+        89% {
+          transform: translateX(-12px);
+        }
+        100% {
+          transform: translateX(14px);
+        }
+      }
+      @keyframes paper05 {
+        5% {
+          transform: translateY(46px);
+        }
+        20%,
+        30% {
+          transform: translateY(34px);
+        }
+        40%,
+        55% {
+          transform: translateY(22px);
+        }
+        65%,
+        70% {
+          transform: translateY(10px);
+        }
+        80%,
+        85% {
+          transform: translateY(0);
+        }
+        92%,
+        100% {
+          transform: translateY(46px);
+        }
+      }
+      @keyframes keyboard05 {
+        5%,
+        12%,
+        21%,
+        30%,
+        39%,
+        48%,
+        57%,
+        66%,
+        75%,
+        84% {
+          box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key),
+            45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key),
+            90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key),
+            52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key),
+            83px 10px 0 var(--key);
+        }
+        9% {
+          box-shadow: 15px 2px 0 var(--key), 30px 0 0 var(--key),
+            45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key),
+            90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key),
+            52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key),
+            83px 10px 0 var(--key);
+        }
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: url("5.jpg") no-repeat center center fixed;
+        background-size: cover;
+        margin: 0;
+        padding: 20px;
+      }
+      h2 {
+        text-align: center;
+        color: #368B75;
+        font-size: 2.5em;
+        text-shadow: 0 0 10px #368B75;
+        animation: glowing 1.5s infinite alternate;
+        margin-bottom: 20px;
+      }
+      @keyframes glowing {
+        from {
+          text-shadow: 0 0 10px #368B75;
+        }
+        to {
+          text-shadow: 0 0 20px #28ff6f;
+        }
+      }
+      @font-face {
+  font-family: 'Sakkal Majalla';
+  src: url('fonts/SakkalMajallaBold.woff2') format('woff2'),
+       url('fonts/SakkalMajallaBold.woff') format('woff');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Sakkal Majalla';
+  src: url('fonts/SakkalMajallaRegular.woff2') format('woff2'),
+       url('fonts/SakkalMajallaRegular.woff') format('woff');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Tajawal';
+  src: url('fonts/Tajawal-ExtraLight.woff2') format('woff2'),
+       url('fonts/Tajawal-ExtraLight.woff') format('woff');
+  font-weight: 200;
+}
+
+
+      #toggleOrder {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: #014d07;
+        color: #00ff1a;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      #toggleOrder:hover {
+        background: #368B75;
+      }
+      #arrangeButton {
+        position: absolute;
+        top: 70px;
+        left: 20px;
+        background: #014d07;
+        color: #00ff1a;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      #arrangeButton:hover {
+        background: #368B75;
+      }
+      .report-container {
+  font-family: 'Sakkal Majalla', sans-serif;
+  font-size: 1.1rem;
+}
+
+.modal-title {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+}
+      .report-container {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        margin: 15px auto;
+        max-width: 600px;
+      }
+      .report-container label {
+        font-weight: bold;
+        color: #368B75;
+      }
+      .report-container input,
+      .report-container textarea,
+      .report-container select {
+        width: calc(100% - 30px);
+        padding: 5px;
+        margin: 5px 0 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: #f9f9f9;
+        transition: background 0.3s;
+      }
+      .report-container input:disabled,
+      .report-container textarea:disabled,
+      .report-container select:disabled {
+        background: #eee;
+      }
+      .report-container button.save-report {
+        margin-top: 10px;
+        background: #368B75;
+        color: #fff;
+        border: none;
+        padding: 7px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: none;
+        transition: background 0.3s;
+      }
+      .report-container button.save-report:hover {
+        background: #368B75;
+      }
+      .timestamp {
+        color: #000;
+        font-weight: bold;
+      }
+      #returnButton {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        background: url("return.png") no-repeat center center;
+        background-size: contain;
+        border: none;
+        cursor: pointer;
+      }
+      #loader {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2000;
+      }
+      #toastContainer {
+        position: fixed;
+        top: 20px;
+        right: 150px;
+        z-index: 1000;
+      }
+      .toast {
+        margin-bottom: 10px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: #fff;
+        opacity: 0;
+        animation: fadein 0.5s forwards, fadeout 0.5s 3s forwards;
+        min-width: 250px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      .toast.success {
+        background-color: #368B75;
+      }
+      .toast.error {
+        background-color: #5B417B;
+      }
+      .toast.info {
+        background-color: #F89F6D;
+      }
+      @keyframes fadein {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeout {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      .delete-button {
+        padding: 0.5em;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 1em;
+        transition: transform 0.2s ease;
+        display: block;
+        margin: 10px auto 0;
+      }
+      .trash-svg {
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      }
+      #lid-group {
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .delete-button:hover #lid-group {
+        transform: rotate(-28deg) translateY(2px);
+      }
+      .delete-button:active #lid-group {
+        transform: rotate(-12deg) scale(0.98);
+      }
+      .delete-button:hover .trash-svg {
+        transform: scale(1.08) rotate(3deg);
+      }
+      .delete-button:active .trash-svg {
+        transform: scale(0.96) rotate(-1deg);
+      }
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 4000;
+      }
+      .stats-modal-content {
+        width: 90%;
+        max-width: 500px;
+        background: linear-gradient(135deg, #8bc34a, #9c27b0);
+        border-radius: 10px;
+        padding: 20px;
+        position: relative;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        color: #fff;
+        font-family: Arial, sans-serif;
+      }
+      .stats-modal-content h3 {
+        margin-top: 0;
+      }
+      .stats-modal-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+      }
+      .stats-modal-content th,
+      .stats-modal-content td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #fff;
+      }
+      .close-modal-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #ccc;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 30px;
+        text-align: center;
+      }
+      .blurred {
+        filter: blur(5px);
+      }
+      .card {
+        width: 300px;
+        background: #fff;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 30px;
+        position: relative;
+        box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.068);
+      }
+      .card-content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .card-heading {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1b1b1b;
+      }
+      .card-description {
+        font-weight: 100;
+        color: #666;
+      }
+      .card-button-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .card-button {
+        width: 50%;
+        height: 35px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .primary {
+        background-color: #ff726d;
+        color: #fff;
+      }
+      .primary:hover {
+        background-color: #ff4922;
+      }
+      .secondary {
+        background-color: #ddd;
+      }
+      .secondary:hover {
+        background-color: #c5c5c5;
+      }
+      .exit-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background-color: transparent;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+      }
+      .exit-button:hover svg {
+        fill: #000;
+      }
+      .exit-button svg {
+        fill: #afb1b1;
+      }
+      .edit-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgb(20, 20, 20);
+        border: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+        cursor: pointer;
+        transition-duration: 0.3s;
+        overflow: hidden;
+        position: relative;
+        text-decoration: none !important;
+      }
+      .edit-svgIcon {
+        width: 17px;
+        transition-duration: 0.3s;
+      }
+      .edit-svgIcon path {
+        fill: white;
+      }
+      .edit-button:hover {
+        width: 120px;
+        border-radius: 50px;
+        transition-duration: 0.3s;
+        background-color: rgb(255, 69, 69);
+        align-items: center;
+      }
+      .edit-button:hover .edit-svgIcon {
+        width: 20px;
+        transition-duration: 0.3s;
+        transform: translateY(60%) rotate(360deg);
+      }
+      .edit-button::before {
+        display: none;
+        content: "Edit";
+        color: white;
+        transition-duration: 0.3s;
+        font-size: 2px;
+      }
+      .edit-button:hover::before {
+        display: block;
+        padding-right: 10px;
+        font-size: 13px;
+        opacity: 1;
+        transform: translateY(0px);
+        transition-duration: 0.3s;
+      }
+      .input__container {
+        position: relative;
+        background: #f0f0f0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        border: 4px solid #368B75;
+        max-width: 350px;
+        transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+        transform: rotateX(10deg) rotateY(-10deg);
+        perspective: 1000px;
+        box-shadow: 10px 10px 0 #368B75;
+      }
+      .input__container:hover {
+        transform: rotateX(5deg) rotateY(1deg) scale(1.05);
+        box-shadow: 25px 25px 0 -5px #19ce0990, 25px 25px 0 0 #368B75;
+      }
+      .shadow__input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+        transform: translateZ(-50px);
+        background: linear-gradient(45deg, rgba(255, 107, 107, 0.4) 0%, rgba(255, 107, 107, 0.1) 100%);
+        filter: blur(20px);
+      }
+      .input__button__shadow {
+        cursor: pointer;
+        border: 3px solid #368B75;
+        background: #368B75;
+        transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        transform: translateZ(20px);
+        position: relative;
+        z-index: 3;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .input__button__shadow:hover {
+        background: #368B75;
+        transform: translateZ(10px) translateX(-5px) translateY(-5px);
+        box-shadow: 5px 5px 0 0 #368B75;
+      }
+      .input__button__shadow svg {
+        fill: #fff;
+        width: 25px;
+        height: 25px;
+      }
+      .input__search {
+        width: 100%;
+        outline: none;
+        border: 3px solid #368B75;
+        padding: 15px;
+        font-size: 18px;
+        background: #fff;
+        color: #000;
+        transform: translateZ(10px);
+        transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+        z-index: 3;
+        font-family: "Roboto", Arial, sans-serif;
+        letter-spacing: -0.5px;
+      }
+      .input__search::placeholder {
+        color: #666;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .input__search:hover,
+      .input__search:focus {
+        background: #f0f0f0;
+        transform: translateZ(20px) translateX(-5px) translateY(-5px);
+        box-shadow: 5px 5px 0 0 #368B75;
+      }
+      .input__container::before {
+        content: "البحث";
+        position: absolute;
+        top: -15px;
+        left: 20px;
+        background: #368B75;
+        color: #000;
+        font-weight: bold;
+        padding: 5px 10px;
+        font-size: 14px;
+        transform: translateZ(50px);
+        z-index: 4;
+        border: 2px solid #368B75;
+      }
+      #searchWrapper {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loader" class="typewriter">
+      <div class="slide">
+        <i></i>
+      </div>
+      <div class="paper"></div>
+      <div class="keyboard"></div>
+    </div>
+    <div id="pageContent">
+      <button id="returnButton"></button>
+      <button id="toggleOrder">عرض الأقدم أولاً</button>
+      <button id="arrangeButton">الإحصائيات</button>
+      <h2>سجل العلاج النفسي للحالات</h2>
+      <div id="searchWrapper">
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+          <div class="input__container">
+            <div class="shadow__input"></div>
+            <button class="input__button__shadow" id="searchButton">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#fff"
+                width="20px"
+                height="20px"
+              >
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                ></path>
+              </svg>
+            </button>
+            <input
+              type="text"
+              name="username"
+              class="input__search"
+              id="searchInput"
+              placeholder="أدخل رقم بطاقة معاق أو الاسم"
+            />
+          </div>
+        </div>
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+          <div class="input__container">
+            <select id="centerSearch" class="input__search">
+              <option value="" disabled selected>البحث من خلال مركز</option>
+              <option value="مركز الاجيال المشرفة صحم">مركز الاجيال المشرفة صحم</option>
+              <option value="مركز الاجيال المشوقة صحار">مركز الاجيال المشوقة صحار</option>
+              <option value="مركز التوحد صحار">مركز التوحد صحار</option>
+              <option value="مركز الحواس الخمسه صحم">مركز الحواس الخمسه صحم</option>
+              <option value="مركز تمكين إعاقات الخابوره">مركز تمكين إعاقات الخابوره</option>
+              <option value="مركز تمكين توحد الخابورة">مركز تمكين توحد الخابورة</option>
+              <option value="مركز تمكين للتوحد صحم">مركز تمكين للتوحد صحم</option>
+              <option value="مركز طيف للتوحد السويق">مركز طيف للتوحد السويق</option>
+              <option value="مركز همس الأثير السويق">مركز همس الأثير السويق</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="reportsContainer"></div>
+      <div id="toastContainer"></div>
+    </div>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        get,
+        update,
+        remove,
+      } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBTsctH95CxTs4H0V3We4J1hzNH8SqRhfQ",
+        authDomain: "al3ked-27b70.firebaseapp.com",
+        databaseURL:
+          "https://al3ked-27b70-default-rtdb.firebaseio.com",
+        projectId: "al3ked-27b70",
+        storageBucket: "al3ked-27b70.appspot.com",
+        messagingSenderId: "996500808289",
+        appId: "1:996500808289:web:cdd08dad98cdbbe67ec020",
+        measurementId: "G-4HKEXH39S4",
+      };
+
+      const app = initializeApp(firebaseConfig),
+        db = getDatabase(app);
+
+      const reportsContainer = document.getElementById("reportsContainer"),
+        toastContainer = document.getElementById("toastContainer"),
+        loader = document.getElementById("loader"),
+        searchInput = document.getElementById("searchInput"),
+        searchButton = document.getElementById("searchButton"),
+        toggleOrderBtn = document.getElementById("toggleOrder"),
+        returnButton = document.getElementById("returnButton"),
+        arrangeButton = document.getElementById("arrangeButton");
+
+      const TARGET_THERAPY = "علاج-نفسي";
+      let currentReportsList = [];
+
+      function showToast(message, type = "info") {
+        const toast = document.createElement("div");
+        toast.className = "toast " + type;
+        toast.textContent = message;
+        toastContainer.appendChild(toast);
+        setTimeout(() => toast.remove(), 3500);
+      }
+
+      function parseArabicTimestamp(ts) {
+        if (!ts) return new Date(0);
+        ts = ts.replace("ص", "AM").replace("م", "PM").replace(",", "");
+        const parts = ts.trim().split(" ");
+        if (parts.length < 3) return new Date(ts);
+        const [month, day, year] = parts[0].split("/").map((n) => +n);
+        const [hour, minute, second] = parts[1].split(":").map((n) => +n);
+        let h = hour;
+        if (parts[2].toUpperCase() === "PM" && hour < 12) h += 12;
+        if (parts[2].toUpperCase() === "AM" && hour === 12) h = 0;
+        return new Date(year, month - 1, day, h, minute, second);
+      }
+
+      function renderReport(civilId, therapyData) {
+        const div = document.createElement("div");
+        div.className = "report-container";
+        div.innerHTML = `
+          <label>رقم بطاقة معاق:</label>
+          <input type="text" value="${civilId}" disabled><br>
+<label>الاسم:</label>
+<input type="text" value="${therapyData.name || ''}" disabled>
+<button class="edit-button" title="تعديل">
+  <svg class="edit-svgIcon" viewBox="0 0 512 512">
+    <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+  </svg>
+</button><br>
+          <label>اسم المركز:</label>
+          <select disabled>
+            <option value="مركز التوحد صحار" ${
+              therapyData.centerName === "مركز التوحد صحار" ? "selected" : ""
+            }>مركز التوحد صحار</option>
+            <option value="مركز الاجيال المشوقة صحار" ${
+              therapyData.centerName === "مركز الاجيال المشوقة صحار" ? "selected" : ""
+            }>مركز الاجيال المشوقة صحار</option>
+            <option value="مركز الاجيال المشرفة صحم" ${
+              therapyData.centerName === "مركز الاجيال المشرفة صحم" ? "selected" : ""
+            }>مركز الاجيال المشرفة صحم</option>
+            <option value="مركز الحواس الخمسه صحم" ${
+              therapyData.centerName === "مركز الحواس الخمسه صحم" ? "selected" : ""
+            }>مركز الحواس الخمسه صحم</option>
+            <option value="مركز تمكين للتوحد صحم" ${
+              therapyData.centerName === "مركز تمكين للتوحد صحم" ? "selected" : ""
+            }>مركز تمكين للتوحد صحم</option>
+            <option value="مركز تمكين إعاقات الخابوره" ${
+              therapyData.centerName === "مركز تمكين إعاقات الخابوره" ? "selected" : ""
+            }>مركز تمكين إعاقات الخابوره</option>
+            <option value="مركز تمكين توحد الخابورة" ${
+              therapyData.centerName === "مركز تمكين توحد الخابورة" ? "selected" : ""
+            }>مركز تمكين توحد الخابورة</option>
+            <option value="مركز طيف للتوحد السويق" ${
+              therapyData.centerName === "مركز طيف للتوحد السويق" ? "selected" : ""
+            }>مركز طيف للتوحد السويق</option>
+            <option value="مركز همس الأثير السويق" ${
+              therapyData.centerName === "مركز همس الأثير السويق" ? "selected" : ""
+            }>مركز همس الأثير السويق</option>
+          </select>
+          <button class="edit-button" title="تعديل">
+            <svg class="edit-svgIcon" viewBox="0 0 512 512">
+              <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+            </svg>
+          </button><br>
+          <label>النسبة:</label>
+          <input type="text" value="${therapyData.percentage || ''}" disabled>
+          <button class="edit-button" title="تعديل">
+            <svg class="edit-svgIcon" viewBox="0 0 512 512">
+              <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+            </svg>
+          </button><br>
+          <label>عدد الجلسات الحاليه:</label>
+          <input type="text" value="${therapyData.sessions || ''}" disabled>
+          <button class="edit-button" title="تعديل">
+            <svg class="edit-svgIcon" viewBox="0 0 512 512">
+              <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+            </svg>
+          </button><br>
+          <label>عدد الجلسات الجديده:</label>
+          <input type="text" value="${therapyData.newSessions || ''}" disabled>
+          <button class="edit-button" title="تعديل">
+            <svg class="edit-svgIcon" viewBox="0 0 512 512">
+              <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+            </svg>
+          </button><br>
+          <label>التقييم:</label>
+          <textarea rows="3" disabled>${therapyData.evaluation || ''}</textarea>
+          <button class="edit-button" title="تعديل">
+            <svg class="edit-svgIcon" viewBox="0 0 512 512">
+              <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+            </svg>
+          </button><br>
+          <label>ملاحظات مستقلة:</label>
+          <input type="text" value="${therapyData.independentNotes || ''}" disabled>
+          <button class="edit-button" title="تعديل">
+            <svg class="edit-svgIcon" viewBox="0 0 512 512">
+              <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+            </svg>
+          </button><br>
+          <small class="timestamp">وقت الإنشاء: ${therapyData.timestamp || 'غير متوفر'}</small><br>
+          <button aria-label="Delete item" class="delete-button" style="width:2.5em; height:2.5em;">
+            <svg class="trash-svg" viewBox="0 -10 64 74" xmlns="http://www.w3.org/2000/svg">
+              <g id="trash-can">
+                <rect x="16" y="24" width="32" height="30" rx="3" ry="3" fill="#e74c3c"></rect>
+                <g id="lid-group">
+                  <rect x="12" y="12" width="40" height="6" rx="2" ry="2" fill="#c0392b"></rect>
+                  <rect x="26" y="8" width="12" height="4" rx="2" ry="2" fill="#c0392b"></rect>
+                </g>
+              </g>
+            </svg>
+          </button>
+          <button class="save-report">حفظ</button>
+        `;
+        div.querySelector(".save-report").addEventListener("click", async () => {
+          const inputs = div.querySelectorAll("input, textarea, select"),
+            updatedData = {
+              name: inputs[1].value,
+              centerName: inputs[2].value,
+              percentage: inputs[3].value,
+              sessions: inputs[4].value,
+              newSessions: inputs[5].value,
+              evaluation: inputs[6].value,
+              independentNotes: inputs[7].value,
+              timestamp: therapyData.timestamp,
+            },
+            basePath = `Data/${civilId}/${TARGET_THERAPY}`,
+            oldCenter = therapyData.centerName,
+            newCenter = updatedData.centerName,
+            oldPercentage = parseFloat(therapyData.percentage) || 0,
+            newPercentage = parseFloat(updatedData.percentage) || 0;
+          try {
+            await update(ref(db, basePath), updatedData);
+            if (oldCenter !== newCenter) {
+              const oldRef = ref(db, `rate/${oldCenter}`),
+                oldSnap = await get(oldRef),
+                oldData = oldSnap.exists()
+                  ? oldSnap.val()
+                  : { "عدد": 0, "عدد-علاج-نفسي": 0, "علاج-نفسي": 0 };
+              await update(oldRef, {
+                "عدد": (oldData["عدد"] || 0) - 1,
+                "عدد-علاج-نفسي": (oldData["عدد-علاج-نفسي"] || 0) - 1,
+                "علاج-نفسي": (oldData["علاج-نفسي"] || 0) - oldPercentage,
+              });
+              const newRef = ref(db, `rate/${newCenter}`),
+                newSnap = await get(newRef),
+                newData = newSnap.exists()
+                  ? newSnap.val()
+                  : { "عدد": 0, "عدد-علاج-نفسي": 0, "علاج-نفسي": 0 };
+              await update(newRef, {
+                "عدد": (newData["عدد"] || 0) + 1,
+                "عدد-علاج-نفسي": (newData["عدد-علاج-نفسي"] || 0) + 1,
+                "علاج-نفسي": (newData["علاج-نفسي"] || 0) + newPercentage,
+              });
+            } else {
+              const centerRef = ref(db, `rate/${oldCenter}`),
+                centerSnap = await get(centerRef),
+                centerData = centerSnap.exists()
+                  ? centerSnap.val()
+                  : { "عدد": 0, "عدد-علاج-نفسي": 0, "علاج-نفسي": 0 },
+                updatedSum =
+                  (centerData["علاج-نفسي"] || 0) - oldPercentage + newPercentage;
+              await update(centerRef, { "علاج-نفسي": updatedSum });
+            }
+            showToast("تم التحديث والحفظ بنجاح!", "success");
+            setTimeout(() => location.reload(), 1000);
+          } catch (e) {
+            showToast("حدث خطأ أثناء الحفظ!", "error");
+          }
+        });
+        div.querySelector(".delete-button").addEventListener("click", () => {
+          const modal = document.createElement("div");
+          modal.className = "modal-overlay";
+          modal.innerHTML = `
+            <div class="card">
+              <div class="card-content">
+                <p class="card-heading">حذف التقرير؟</p>
+                <p class="card-description">هل أنت متأكد من حذف هذا التقرير؟ (لا يمكن التراجع عن هذا القرار)</p>
+              </div>
+              <div class="card-button-wrapper">
+                <button class="card-button secondary">إلغاء</button>
+                <button class="card-button primary">حذف</button>
+              </div>
+              <button class="exit-button">
+                <svg height="20px" viewBox="0 0 384 512">
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          `;
+          document.body.appendChild(modal);
+          modal.querySelector(".card-button.secondary").addEventListener("click", () =>
+            modal.remove()
+          );
+          modal.querySelector(".exit-button").addEventListener("click", () =>
+            modal.remove()
+          );
+          modal.querySelector(".card-button.primary").addEventListener("click", async () => {
+            const basePath = `Data/${civilId}/${TARGET_THERAPY}`;
+            try {
+              await remove(ref(db, basePath));
+              const center = therapyData.centerName;
+              const percentage = parseFloat(therapyData.percentage) || 0;
+              const centerRef = ref(db, `rate/${center}`);
+              const centerSnap = await get(centerRef);
+              const centerData = centerSnap.exists()
+                ? centerSnap.val()
+                : { "عدد": 0, "عدد-علاج-نفسي": 0, "علاج-نفسي": 0 };
+              await update(centerRef, {
+                "عدد": (centerData["عدد"] || 0) - 1,
+                "عدد-علاج-نفسي": (centerData["عدد-علاج-نفسي"] || 0) - 1,
+                "علاج-نفسي": (centerData["علاج-نفسي"] || 0) - percentage,
+              });
+              showToast("تم الحذف بنجاح!", "success");
+              div.remove();
+            } catch (e) {
+              showToast("حدث خطأ أثناء الحذف!", "error");
+            } finally {
+              modal.remove();
+            }
+          });
+        });
+        return div;
+      }
+
+      async function loadReports() {
+        try {
+          const snapshot = await get(ref(db, "Data"));
+          if (snapshot.exists()) {
+            const data = snapshot.val(),
+              arr = [];
+            Object.entries(data).forEach(([civilId, userData]) => {
+              if (userData[TARGET_THERAPY])
+                arr.push({ civilId, therapyData: userData[TARGET_THERAPY] });
+            });
+            arr.sort(
+              (a, b) =>
+                (b.therapyData.timestamp
+                  ? parseArabicTimestamp(b.therapyData.timestamp).getTime()
+                  : 0) -
+                (a.therapyData.timestamp
+                  ? parseArabicTimestamp(a.therapyData.timestamp).getTime()
+                  : 0)
+            );
+            currentReportsList = arr;
+            reportsContainer.innerHTML = "";
+            currentReportsList.forEach((item) => {
+              reportsContainer.appendChild(
+                renderReport(item.civilId, item.therapyData)
+              );
+            });
+          } else {
+            reportsContainer.innerHTML =
+              "<p style='text-align:center;'>لا توجد بيانات متاحة.</p>";
+          }
+        } catch (e) {
+          showToast("حدث خطأ أثناء تحميل البيانات!", "error");
+        }
+        loader.style.display = "none";
+        document.getElementById("searchWrapper").style.display = "block";
+      }
+
+      async function searchReport() {
+        const query = searchInput.value.trim();
+        if (!query) {
+          showToast("برجاء إدخال رقم بطاقة معاق أو الاسم للبحث.", "info");
+          return;
+        }
+        reportsContainer.innerHTML = "";
+        const queryLower = query.toLowerCase();
+        const filtered = currentReportsList.filter(
+          (item) =>
+            item.civilId.startsWith(query) ||
+            (item.therapyData.name &&
+              item.therapyData.name.toLowerCase().includes(queryLower))
+        );
+        if (filtered.length === 0) {
+          showToast("لم يتم العثور على تقارير مطابقة.", "info");
+        } else {
+          filtered.forEach((item) => {
+            reportsContainer.appendChild(
+              renderReport(item.civilId, item.therapyData)
+            );
+          });
+        }
+      }
+
+      function searchByCenter() {
+        const center = document.getElementById("centerSearch").value;
+        reportsContainer.innerHTML = "";
+        const filtered = currentReportsList.filter(
+          (item) => item.therapyData.centerName === center
+        );
+        if (filtered.length === 0) {
+          showToast("لا توجد تقارير لهذا المركز.", "info");
+          return;
+        }
+        filtered.forEach((item) => {
+          reportsContainer.appendChild(renderReport(item.civilId, item.therapyData));
+        });
+      }
+
+      toggleOrderBtn.addEventListener("click", () => {
+        currentReportsList.reverse();
+        toggleOrderBtn.textContent = currentReportsList[0].therapyData.timestamp
+          ? "عرض الأقدم أولاً"
+          : "عرض الأحدث أولاً";
+        reportsContainer.innerHTML = "";
+        currentReportsList.forEach((item) => {
+          reportsContainer.appendChild(renderReport(item.civilId, item.therapyData));
+        });
+      });
+
+      searchButton.addEventListener("click", searchReport);
+      searchInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") searchReport();
+      });
+      document
+        .getElementById("centerSearch")
+        .addEventListener("change", searchByCenter);
+
+      returnButton.addEventListener("click", () => {
+        if (window.history.length > 1) window.history.back();
+        else showToast("لا توجد صفحة سابقة للعودة إليها.", "info");
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        if (!sessionStorage.getItem("signed_in"))
+          window.location.href = "signin.html";
+      });
+
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".edit-button");
+        if (btn) {
+          let targetEl = btn.previousElementSibling;
+          while (
+            targetEl &&
+            (targetEl.tagName === "BR" || targetEl.tagName === "LABEL")
+          ) {
+            targetEl = targetEl.previousElementSibling;
+          }
+          if (
+            targetEl &&
+            ["INPUT", "TEXTAREA", "SELECT"].includes(targetEl.tagName)
+          ) {
+            targetEl.disabled = false;
+            targetEl.style.background = "#fff";
+            const container = btn.closest(".report-container"),
+              saveBtn = container.querySelector(".save-report");
+            if (saveBtn) saveBtn.style.display = "inline-block";
+          }
+        }
+      });
+
+      async function openStatsModalArrange() {
+        document.getElementById("pageContent").classList.add("blurred");
+        let rateSnap = await get(ref(db, "rate"));
+        let rateData = rateSnap.exists() ? rateSnap.val() : {};
+        let totalCases = 0,
+          totalPercent = 0;
+        const centers = [
+          "مركز الاجيال المشرفة صحم",
+          "مركز الاجيال المشوقة صحار",
+          "مركز التوحد صحار",
+          "مركز الحواس الخمسه صحم",
+          "مركز تمكين إعاقات الخابوره",
+          "مركز تمكين توحد الخابورة",
+          "مركز تمكين للتوحد صحم",
+          "مركز طيف للتوحد السويق",
+          "مركز همس الأثير السويق",
+        ];
+        for (let key in rateData) {
+          totalCases += Number(rateData[key]["عدد-علاج-نفسي"] || 0);
+          totalPercent += Number(rateData[key]["علاج-نفسي"] || 0);
+        }
+        let tableRows = centers
+          .map((center) => {
+            let centerCases = rateData[center]
+              ? Number(rateData[center]["عدد-علاج-نفسي"] || 0)
+              : 0;
+            let centerPercent = rateData[center]
+              ? Number(rateData[center]["علاج-نفسي"] || 0)
+              : 0;
+            return `<tr>
+                      <td>${center}</td>
+                      <td>${centerCases}</td>
+                      <td>${centerPercent}</td>
+                    </tr>`;
+          })
+          .join("");
+        let modal = document.createElement("div");
+        modal.className = "modal-overlay stats-modal";
+        modal.innerHTML = `
+          <div class="stats-modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <h3 style="text-align:center;">الإحصائيات المرتبة</h3>
+            <p>عدد الحالات التي تم تقييمها: ${totalCases}</p>
+            <p>مجموع النسب: ${totalPercent}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>المركز</th>
+                  <th>مجموع الحالات</th>
+                  <th>مجموع النسب</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${tableRows}
+              </tbody>
+            </table>
+          </div>
+        `;
+        document.body.appendChild(modal);
+        modal.querySelector(".close-modal-btn").addEventListener("click", () => {
+          modal.remove();
+          document.getElementById("pageContent").classList.remove("blurred");
+        });
+      }
+
+      arrangeButton.addEventListener("click", openStatsModalArrange);
+      window.onload = loadReports;
+    </script>
+  </body>
+</html>

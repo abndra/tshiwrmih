@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منتجات وأسعار</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      color: #fff;
+    }
+    .loader {
+      width: 48px;
+      height: 48px;
+      background: #000;
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      box-sizing: border-box;
+      animation: rotationBack 1s ease-in-out infinite reverse;
+    }
+    .loader.stopped {
+      animation-play-state: paused;
+    }
+    .loader::before {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 48px;
+      height: 48px;
+      background: #FF0000;
+      transform: rotate(45deg);
+      box-shadow: 0 0 5px rgba(255,0,0,0.5);
+    }
+    .loader::after {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #000;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    @keyframes rotationBack {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+    .menu-button {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 60px;
+      height: 60px;
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+    }
+    .menu-dropdown {
+      position: fixed;
+      top: 80px;
+      right: 10px;
+      z-index: 1000;
+      display: none;
+      background: #000;
+      border: 2px solid #FF0000;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .menu-dropdown button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      color: #FF0000;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: right;
+    }
+    .menu-dropdown button:hover {
+      background: #FF0000;
+      color: #fff;
+    }
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .icon {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #000;
+      border: 2px solid #FF0000;
+      aspect-ratio: 1 / 1;
+      box-shadow: 0 4px 8px rgba(255,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .icon:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px 3px rgba(255,0,0,0.8);
+    }
+    .icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      padding: 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .label {
+      font-size: 16px;
+      font-weight: bold;
+      color: #FF0000;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .price {
+      font-size: 14px;
+      color: #fff;
+    }
+    .quantity-controls {
+      margin-top: 5px;
+      display: none;
+      gap: 5px;
+      align-items: center;
+    }
+    .quantity-controls button {
+      background-color: #FF0000;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #fff;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    .quantity-controls button:hover {
+      background-color: #cc0000;
+    }
+    .quantity-controls input {
+      width: 40px;
+      text-align: center;
+      border: 1px solid #FF0000;
+      border-radius: 4px;
+      background: #000;
+      color: #fff;
+      padding: 3px;
+    }
+    .Btn {
+      width: 140px;
+      height: 40px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(to right, #FF0000, #000);
+      background-size: 250%;
+      background-position: left;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.5s;
+      margin: 20px auto;
+    }
+    .Btn:hover {
+      background-position: right;
+    }
+    .Btn:active {
+      transform: scale(0.95);
+    }
+    #notification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #000;
+      border: 2px solid #FF0000;
+      padding: 10px 20px;
+      color: #FF0000;
+      font-size: 16px;
+      border-radius: 8px;
+      display: none;
+      z-index: 2000;
+    }
+  </style>
+</head>
+<body>
+  <button id="menu-button" class="menu-button">
+    <div id="loader" class="loader"></div>
+  </button>
+  <div id="menu-dropdown" class="menu-dropdown">
+    <button id="profile-btn">tshiwrmih-تْشِورمه</button>
+    <button id="record-btn">السجل</button>
+    <button id="calculator-btn">حاسبة</button>
+  </div>
+  <div class="icon-grid" id="products">
+      <!-- مثال على منتج سكر، مع باقي المنتجات بنفس التنسيق -->
+      <div class="icon" data-id="1">
+        <img src="3.jpg" alt="سكر">
+        <div class="overlay">
+          <span class="label">سكر</span>
+          <span class="price" id="price-1"></span>
+          <div class="quantity-controls">
+            <button class="decrement">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="increment">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="icon" data-id="2">
+        <img src="4.jpg" alt="ملح">
+        <div class="overlay">
+          <span class="label">ملح</span>
+          <span class="price" id="price-2"></span>
+          <div class="quantity-controls">
+            <button class="decrement">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="increment">+</button>
+          </div>
+        </div>
+      </div>
+      <!-- باقي المنتجات ... -->
+      <div class="icon" data-id="3">
+        <img src="5.jpg" alt="ملح ليمون">
+        <div class="overlay">
+          <span class="label">ملح ليمون</span>
+          <span class="price" id="price-3"></span>
+          <div class="quantity-controls">
+            <button class="decrement">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="increment">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="icon" data-id="4">
+        <img src="6.jpg" alt="سماق">
+        <div class="overlay">
+          <span class="label">سماق</span>
+          <span class="price" id="price-4"></span>
+          <div class="quantity-controls">
+            <button class="decrement">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="increment">+</button>
+          </div>
+        </div>
+      </div>
+      <!-- باقي المنتجات حتى المنتج رقم 32 ... -->
+      <div class="icon" data-id="32">
+        <img src="34.jpg" alt="لحم">
+        <div class="overlay">
+          <span class="label">لحم</span>
+          <span class="price" id="price-32"></span>
+          <div class="quantity-controls">
+            <button class="decrement">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="increment">+</button>
+          </div>
+        </div>
+      </div>
+      <!-- التأكد من أن أرقام المعرفات فريدة للمنتجات التالية -->
+      <div class="icon" data-id="33">
+        <img src="35.jpg" alt="شبس">
+        <div class="overlay">
+          <span class="label">شبس</span>
+          <span class="price" id="price-33"></span>
+          <div class="quantity-controls">
+            <button class="decrement">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="increment">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="icon" data-id="34">
+        <img src="36.jpg" alt="غاز">
+        <div class="overlay">
+          <span class="label">غاز</span>
+          <span class="price" id="price-34"></span>
+          <div class="quantity-controls">
+            <button class="decrement">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="increment">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="icon" data-id="35">
+        <img src="36.jpg" alt="اجار شقة عامل">
+        <div class="overlay">
+          <span class="label">اجار شقة عامل</span>
+          <span class="price" id="price-35"></span>
+          <div class="quantity-controls">
+            <button class="decrement">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="increment">+</button>
+          </div>
+        </div>
+      </div>
+  </div>
+  <button id="global-save" class="Btn">حفظ</button>
+  <div id="notification">تم حفظ المنتجات بنجاح</div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+    import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyBTkxX-GMj8GtZ-t6-626WqB5PV2AWxQS8",
+      authDomain: "tshiwrmih-49a42.firebaseapp.com",
+      databaseURL: "https://tshiwrmih-49a42-default-rtdb.firebaseio.com",
+      projectId: "tshiwrmih-49a42",
+      storageBucket: "tshiwrmih-49a42.firebasestorage.app",
+      messagingSenderId: "576466206031",
+      appId: "1:576466206031:web:55d1b24221a41a11bc593a",
+      measurementId: "G-MY6EVZ6LB5"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getDatabase(app);
+    
+    // جلب السعر الأساسي من قاعدة البيانات وتحديث العرض وسمة data-base-price
+    function fetchPrice(productId) {
+      const priceRef = ref(db, 'Data/' + productId);
+      get(priceRef).then((snapshot) => {
+        if(snapshot.exists()){
+          const basePrice = snapshot.val();
+          document.getElementById('price-' + productId).textContent = "السعر: " + basePrice;
+          let icon = document.querySelector('.icon[data-id="'+productId+'"]');
+          if(icon) {
+            icon.setAttribute('data-base-price', basePrice);
+          }
+        }
+      }).catch((error)=>{
+        console.error(error);
+      });
+    }
+    
+    // جلب أسعار جميع المنتجات (من 1 إلى 35)
+    for(let i = 1; i <= 35; i++){
+      fetchPrice(i);
+    }
+    
+    // دالة لتحديث السعر المعروض بناءً على الكمية والسعر الأساسي
+    function updatePrice(icon) {
+      const basePrice = parseFloat(icon.getAttribute('data-base-price')) || 0;
+      const quantity = parseInt(icon.querySelector('.quantity-input').value) || 1;
+      const computedPrice = (quantity * basePrice).toFixed(2);
+      icon.querySelector('.price').textContent = "السعر: " + computedPrice;
+    }
+    
+    // تفعيل زر القائمة
+    const menuButton = document.getElementById('menu-button');
+    const menuDropdown = document.getElementById('menu-dropdown');
+    const loader = document.getElementById('loader');
+    menuButton.addEventListener('click', ()=>{
+      if(menuDropdown.style.display === "none" || menuDropdown.style.display === ""){
+        menuDropdown.style.display = "block";
+        loader.classList.add('stopped');
+      } else {
+        menuDropdown.style.display = "none";
+        loader.classList.remove('stopped');
+      }
+    });
+    document.getElementById('record-btn').addEventListener('click', ()=>{
+      window.location.href = "record.html";
+    });
+    document.getElementById('calculator-btn').addEventListener('click', ()=>{
+      window.location.href = "calculator.html";
+    });
+    
+    // التعامل مع اختيار المنتج وتغيير الكمية
+    const icons = document.querySelectorAll('.icon');
+    icons.forEach(icon=>{
+      icon.addEventListener('click', (e)=>{
+        if(e.target.tagName.toLowerCase() === "button" || e.target.classList.contains('quantity-input')) return;
+        icon.classList.toggle('selected');
+        const qc = icon.querySelector('.quantity-controls');
+        qc.style.display = icon.classList.contains('selected') ? "flex" : "none";
+      });
+      
+      const increment = icon.querySelector('.increment');
+      const decrement = icon.querySelector('.decrement');
+      const input = icon.querySelector('.quantity-input');
+      let incInterval, decInterval;
+      
+      increment.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        input.value = parseInt(input.value) + 1;
+        updatePrice(icon);
+      });
+      increment.addEventListener('mousedown', (e)=>{
+        e.stopPropagation();
+        incInterval = setInterval(()=>{
+          input.value = parseInt(input.value) + 1;
+          updatePrice(icon);
+        }, 200);
+      });
+      increment.addEventListener('mouseup', ()=>{
+        clearInterval(incInterval);
+      });
+      increment.addEventListener('mouseleave', ()=>{
+        clearInterval(incInterval);
+      });
+      
+      decrement.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        if(parseInt(input.value) > 1){
+          input.value = parseInt(input.value) - 1;
+          updatePrice(icon);
+        }
+      });
+      decrement.addEventListener('mousedown', (e)=>{
+        e.stopPropagation();
+        decInterval = setInterval(()=>{
+          if(parseInt(input.value) > 1){
+            input.value = parseInt(input.value) - 1;
+            updatePrice(icon);
+          }
+        }, 200);
+      });
+      decrement.addEventListener('mouseup', ()=>{
+        clearInterval(decInterval);
+      });
+      decrement.addEventListener('mouseleave', ()=>{
+        clearInterval(decInterval);
+      });
+    });
+    
+    // حفظ المنتجات في قاعدة البيانات مع تحديث الكمية والسعر المحسوب
+    document.getElementById('global-save').addEventListener('click', ()=>{
+      const selectedIcons = document.querySelectorAll('.icon.selected');
+      if(selectedIcons.length === 0) return;
+      const now = new Date();
+      const today = now.getFullYear()+'/'+(now.getMonth()+1)+'/'+now.getDate();
+      const currentTime = today +', '+now.toLocaleTimeString();
+      
+      selectedIcons.forEach(icon=>{
+        const id = icon.getAttribute('data-id');
+        const name = icon.querySelector('.label').textContent;
+        const quantity = parseInt(icon.querySelector('.quantity-input').value);
+        const basePrice = parseFloat(icon.getAttribute('data-base-price')) || 0;
+        const computedPrice = parseFloat((quantity * basePrice).toFixed(2));
+        const prodRef = ref(db, 'Data2/' + today + '/' + id);
+        get(prodRef).then((snapshot)=>{
+          if(snapshot.exists()){
+            const existing = snapshot.val();
+            const newQty = parseInt(existing.quantity) + quantity;
+            const newPrice = parseFloat(existing.price || 0) + computedPrice;
+            update(prodRef, { quantity: newQty, price: newPrice, creationTime: currentTime });
+          } else {
+            set(prodRef, { productName: name, productId: id, quantity: quantity, price: computedPrice, creationTime: currentTime });
+          }
+        }).catch((error)=>{
+          console.error(error);
+        });
+      });
+      
+      const notification = document.getElementById('notification');
+      notification.style.display = "block";
+      setTimeout(()=>{
+        notification.style.display = "none";
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
