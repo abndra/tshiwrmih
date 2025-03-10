@@ -78,17 +78,6 @@
       min-width: 120px;
       display: inline-block;
     }
-    .edit-btn {
-      background: #FF0000;
-      color: #000;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .edit-btn:hover {
-      background: #cc0000;
-    }
     /* زر إصدار الأحصائيات */
     #statsButton {
       background: #FF0000;
@@ -157,6 +146,8 @@
       width: 90%;
       max-width: 500px;
       position: relative;
+      max-height: 80vh; /* تحديد ارتفاع أقصى للنموذج */
+      overflow-y: auto; /* تمكين التمرير العمودي */
     }
     #statsModal table {
       width: 100%;
@@ -218,12 +209,11 @@
     </select>
     <button id="filterButton">تصفية</button>
     <button id="clearFilterButton">إزالة التصفية</button>
-    <button id="toggleOrder">عرض الأقدم أولاً</button>
     <button id="statsButton">إصدار الأحصائيات</button>
   </div>
   <div id="reportsContainer"></div>
   
-  <!-- نافذة اختيار السنة والشهر لإصدار الأحصائيات -->
+  <!-- نافذة اختيار التاريخ لإصدار الأحصائيات -->
   <div id="statsFilterModal">
     <div class="modal-content">
       <h3>اختر الشهر والسنة</h3>
@@ -307,7 +297,6 @@
     const yearFilter = document.getElementById("yearFilter");
     const filterButton = document.getElementById("filterButton");
     const clearFilterButton = document.getElementById("clearFilterButton");
-    const toggleOrderBtn = document.getElementById("toggleOrder");
     const statsButton = document.getElementById("statsButton");
     const statsFilterModal = document.getElementById("statsFilterModal");
     const generateStatsBtn = document.getElementById("generateStats");
@@ -385,23 +374,16 @@
           <p><strong>اسم المنتج:</strong> ${record.productName || ""}</p>
           <p><strong>رقم المنتج:</strong> ${record.productId || ""}</p>
           <p><strong>عدد الكمية:</strong> ${record.quantity || ""}</p>
+          <p><strong>سعر المنتج:</strong> ${record.price || ""}</p>
           <p><strong>وقت الإنشاء:</strong> ${record.creationTime || ""}</p>
         </div>
-        <button class="edit-btn" data-recordid="${record.recordId}" data-reportdate="${record.reportDate}">تعديل</button>
       `;
-      const editBtn = card.querySelector(".edit-btn");
-      editBtn.addEventListener("click", () => {
-        const newQuantity = prompt("أدخل الكمية الجديدة:", record.quantity);
-        if (newQuantity && !isNaN(newQuantity)) {
-          updateRecord(record.reportDate, record.recordId, newQuantity);
-        }
-      });
       return card;
     }
     
     async function updateRecord(reportDate, recordId, newQuantity) {
       try {
-        await update(ref(db, `Data2/${reportDate.split('/').join('/')}/${recordId}`), { 
+        await update(ref(db, `Data2/${reportDate}/${recordId}`), { 
           quantity: newQuantity, 
           modificationTime: new Date().toLocaleString("ar-EG") 
         });
@@ -429,19 +411,9 @@
       renderRecords(filtered);
     }
     
-    filterButton.addEventListener("click", applyFilters);
-    clearFilterButton.addEventListener("click", () => {
-      searchInput.value = "";
-      yearFilter.value = "";
-      renderRecords(allRecords);
-    });
-    toggleOrderBtn.addEventListener("click", () => {
-      orderAsc = !orderAsc;
-      toggleOrderBtn.textContent = orderAsc ? "عرض الأحدث أولاً" : "عرض الأقدم أولاً";
-      renderRecords(allRecords);
-    });
+
     
-    // فتح نافذة اختيار التاريخ لعرض الإحصائيات
+    // فتح نافذة اختيار التاريخ لإصدار الأحصائيات
     statsButton.addEventListener("click", () => {
       statsFilterModal.style.display = "flex";
     });
@@ -464,7 +436,7 @@
         alert("لا توجد بيانات للتقرير حسب التاريخ المحدد");
         return;
       }
-      // تجميع البيانات حسب المنتج
+      // تجميع البيانات حسب المنتج مع حساب السعر بناءً على الكمية
       const aggregated = {};
       filtered.forEach(r => {
         const key = r.productId || r.productName;
@@ -472,21 +444,25 @@
           aggregated[key] = { productName: r.productName || "", productId: r.productId || "", totalQuantity: 0, totalPrice: 0 };
         }
         aggregated[key].totalQuantity += parseFloat(r.quantity) || 0;
-        aggregated[key].totalPrice += parseFloat(r.price) || 0;
+        aggregated[key].totalPrice += (parseFloat(r.price) * (parseFloat(r.quantity) || 1)) || 0;
       });
       showStatistics(aggregated);
       statsFilterModal.style.display = "none";
     });
     
     function showStatistics(aggregatedData) {
-      // حساب العدد الكلي للمنتجات ومجموع الأسعار
       const totalProducts = Object.keys(aggregatedData).length;
       let totalPriceAll = 0;
+      let totalQuantityAll = 0;
       for (const key in aggregatedData) {
         totalPriceAll += aggregatedData[key].totalPrice;
+        totalQuantityAll += aggregatedData[key].totalQuantity;
       }
       
-      let html = `<p style="font-size:18px; font-weight:bold;">عدد المنتجات الكلي : ${totalProducts}</p>`;
+      totalPriceAll = Number(totalPriceAll.toFixed(1));
+      
+      let html = `<p style="font-size:18px; font-weight:bold;">عدد المنتجات المميزة : ${totalProducts}</p>`;
+      html += `<p style="font-size:18px; font-weight:bold;">إجمالي الكميات المباعة : ${totalQuantityAll}</p>`;
       html += `<p style="font-size:18px; font-weight:bold;">السعر الكلي للمنتجات : ${totalPriceAll}</p>`;
       html += `<table>
                  <tr>
@@ -496,9 +472,10 @@
                  </tr>`;
       for (const key in aggregatedData) {
         const item = aggregatedData[key];
+        let roundedPrice = Number(item.totalPrice.toFixed(1));
         html += `<tr>
                    <td>${item.totalQuantity}</td>
-                   <td>${item.totalPrice}</td>
+                   <td>${roundedPrice}</td>
                    <td>${item.productName}</td>
                  </tr>`;
       }

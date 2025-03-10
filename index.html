@@ -3,33 +3,171 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منتجات وأسعار</title>
+  <title>إضافة منتج</title>
   <style>
-    body { margin: 0; padding: 0; background: url('2.jpg') no-repeat center center fixed; background-size: cover; font-family: Arial, sans-serif; direction: rtl; color: #fff; }
-    .loader { width: 48px; height: 48px; background: #000; display: block; margin: 0 auto; position: relative; box-sizing: border-box; animation: rotationBack 1s ease-in-out infinite reverse; }
-    .loader.stopped { animation-play-state: paused; }
-    .loader::before { content: ''; box-sizing: border-box; position: absolute; left: 0; top: 0; width: 48px; height: 48px; background: #FF0000; transform: rotate(45deg); box-shadow: 0 0 5px rgba(255,0,0,0.5); }
-    .loader::after { content: ''; box-sizing: border-box; position: absolute; left: 50%; top: 50%; width: 32px; height: 32px; border-radius: 50%; background: #000; transform: translate(-50%, -50%); box-shadow: 0 0 5px rgba(0,0,0,0.5); }
-    @keyframes rotationBack { 0% { transform: rotate(0deg); } 100% { transform: rotate(-360deg); } }
-    .menu-button { position: fixed; top: 10px; right: 10px; width: 60px; height: 60px; background-color: transparent; border: none; border-radius: 50%; cursor: pointer; z-index: 1000; display: flex; align-items: center; justify-content: center; outline: none; }
-    .menu-dropdown { position: fixed; top: 80px; right: 10px; z-index: 1000; display: none; background: #000; border: 2px solid #FF0000; border-radius: 8px; overflow: hidden; }
-    .menu-dropdown button { display: block; width: 100%; padding: 10px; background: transparent; border: none; color: #FF0000; font-size: 16px; cursor: pointer; text-align: right; }
-    .menu-dropdown button:hover { background: #FF0000; color: #fff; }
-    .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; padding: 20px; }
-    .icon { position: relative; overflow: hidden; border-radius: 10px; background: #000; border: 2px solid #FF0000; aspect-ratio: 1 / 1; box-shadow: 0 4px 8px rgba(255,0,0,0.3); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
-    .icon:hover { transform: scale(1.05); box-shadow: 0 0 15px 3px rgba(255,0,0,0.8); }
-    .icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-    .label { font-size: 16px; font-weight: bold; color: #FF0000; text-shadow: 1px 1px 2px #000; }
-    .price { font-size: 14px; color: #fff; }
-    .quantity-controls { margin-top: 5px; display: none; gap: 5px; align-items: center; }
-    .quantity-controls button { background-color: #FF0000; border: none; padding: 5px 10px; cursor: pointer; font-size: 16px; color: #fff; border-radius: 4px; transition: background-color 0.3s; }
-    .quantity-controls button:hover { background-color: #cc0000; }
-    .quantity-controls input { width: 40px; text-align: center; border: 1px solid #FF0000; border-radius: 4px; background: #000; color: #fff; padding: 3px; }
-    .Btn { width: 140px; height: 40px; border: none; border-radius: 10px; background: linear-gradient(to right, #FF0000, #000); background-size: 250%; background-position: left; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.5s; margin: 20px auto; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      color: #fff;
+    }
+    /* زر القائمة والقائمة المنسدلة */
+    .menu-button {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 60px;
+      height: 60px;
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+    }
+    .menu-dropdown {
+      position: fixed;
+      top: 80px;
+      right: 10px;
+      z-index: 1000;
+      display: none;
+      background: #000;
+      border: 2px solid #FF0000;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .menu-dropdown button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      color: #FF0000;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: right;
+    }
+    .menu-dropdown button:hover {
+      background: #FF0000;
+      color: #fff;
+    }
+    .loader {
+      width: 48px;
+      height: 48px;
+      background: #000;
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      box-sizing: border-box;
+      animation: rotationBack 1s ease-in-out infinite reverse;
+    }
+    .loader.stopped {
+      animation-play-state: paused;
+    }
+    .loader::before {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 48px;
+      height: 48px;
+      background: #FF0000;
+      transform: rotate(45deg);
+      box-shadow: 0 0 5px rgba(255,0,0,0.5);
+    }
+    .loader::after {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #000;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    @keyframes rotationBack {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+    /* حاوية حقول الإدخال مع تأثير الشعشعة */
+    .product-input-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      padding: 0 10px;
+    }
+    .input-field {
+      width: 80%;
+      max-width: 400px;
+      padding: 15px;
+      margin: 10px;
+      font-size: 20px;
+      border: 2px solid #FF0000;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    /* تأثير الشمّر (شعشعة) على حقول الإدخال */
+    .input-field::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: skewX(-25deg);
+      animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    /* زر الحفظ والإشعار */
+    .Btn {
+      width: 140px;
+      height: 40px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(to right, #FF0000, #000);
+      background-size: 250%;
+      background-position: left;
+      color: #fff;
+      display: block;
+      margin: 20px auto;
+      cursor: pointer;
+      transition: all 0.5s;
+    }
     .Btn:hover { background-position: right; }
     .Btn:active { transform: scale(0.95); }
-    #notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #000; border: 2px solid #FF0000; padding: 10px 20px; color: #FF0000; font-size: 16px; border-radius: 8px; display: none; z-index: 2000; }
+    #notification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #000;
+      border: 2px solid #FF0000;
+      padding: 10px 20px;
+      color: #FF0000;
+      font-size: 16px;
+      border-radius: 8px;
+      display: none;
+      z-index: 2000;
+    }
   </style>
 </head>
 <body>
@@ -41,446 +179,20 @@
     <button id="record-btn">السجل</button>
     <button id="calculator-btn">حاسبة</button>
   </div>
-  <div class="icon-grid" id="products">
-    <div class="icon" data-id="1">
-      <img src="3.jpg" alt="سكر">
-      <div class="overlay">
-        <span class="label">سكر</span>
-        <span class="price" id="price-1"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="2">
-      <img src="4.jpg" alt="ملح">
-      <div class="overlay">
-        <span class="label">ملح</span>
-        <span class="price" id="price-2"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="3">
-      <img src="5.jpg" alt="ملح ليمون">
-      <div class="overlay">
-        <span class="label">ملح ليمون</span>
-        <span class="price" id="price-3"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="4">
-      <img src="6.jpg" alt="سماق">
-      <div class="overlay">
-        <span class="label">سماق</span>
-        <span class="price" id="price-4"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="5">
-      <img src="7.jpg" alt="طماط">
-      <div class="overlay">
-        <span class="label">طماط</span>
-        <span class="price" id="price-5"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="6">
-      <img src="8.jpg" alt="خيار">
-      <div class="overlay">
-        <span class="label">خيار</span>
-        <span class="price" id="price-6"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="7">
-      <img src="9.jpg" alt="جزر">
-      <div class="overlay">
-        <span class="label">جزر</span>
-        <span class="price" id="price-7"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="8">
-      <img src="10.jpg" alt="خس">
-      <div class="overlay">
-        <span class="label">خس</span>
-        <span class="price" id="price-8"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="9">
-      <img src="11.jpg" alt="بقدونس">
-      <div class="overlay">
-        <span class="label">بقدونس</span>
-        <span class="price" id="price-9"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="10">
-      <img src="12.jpg" alt="بصل">
-      <div class="overlay">
-        <span class="label">بصل</span>
-        <span class="price" id="price-10"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="11">
-      <img src="13.jpg" alt="ثوم">
-      <div class="overlay">
-        <span class="label">ثوم</span>
-        <span class="price" id="price-11"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="12">
-      <img src="14.jpg" alt="روب">
-      <div class="overlay">
-        <span class="label">روب</span>
-        <span class="price" id="price-12"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="13">
-      <img src="15.jpg" alt="خبز لبناني كبير">
-      <div class="overlay">
-        <span class="label">خبز لبناني كبير</span>
-        <span class="price" id="price-13"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="14">
-      <img src="16.jpg" alt="خبز لبناني صغير">
-      <div class="overlay">
-        <span class="label">خبز لبناني صغير</span>
-        <span class="price" id="price-14"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="15">
-      <img src="17.jpg" alt="بيض">
-      <div class="overlay">
-        <span class="label">بيض</span>
-        <span class="price" id="price-15"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="16">
-      <img src="18.jpg" alt="خل">
-      <div class="overlay">
-        <span class="label">خل</span>
-        <span class="price" id="price-16"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="17">
-      <img src="19.jpg" alt="زيت زيتون">
-      <div class="overlay">
-        <span class="label">زيت زيتون</span>
-        <span class="price" id="price-17"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="18">
-      <img src="20.jpg" alt="مخلل مشكل">
-      <div class="overlay">
-        <span class="label">مخلل مشكل</span>
-        <span class="price" id="price-18"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="19">
-      <img src="21.jpg" alt="بهارات مسقط">
-      <div class="overlay">
-        <span class="label">بهارات مسقط</span>
-        <span class="price" id="price-19"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="20">
-      <img src="22.jpg" alt="حمص حب">
-      <div class="overlay">
-        <span class="label">حمص حب</span>
-        <span class="price" id="price-20"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="21">
-      <img src="23.jpg" alt="زيت دوار الشمس">
-      <div class="overlay">
-        <span class="label">زيت دوار الشمس</span>
-        <span class="price" id="price-21"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="22">
-      <img src="24.jpg" alt="زيت قلي">
-      <div class="overlay">
-        <span class="label">زيت قلي</span>
-        <span class="price" id="price-22"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="23">
-      <img src="25.jpg" alt="داغوس">
-      <div class="overlay">
-        <span class="label">داغوس</span>
-        <span class="price" id="price-23"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="24">
-      <img src="26.jpg" alt="كتشب">
-      <div class="overlay">
-        <span class="label">كتشب</span>
-        <span class="price" id="price-24"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="25">
-      <img src="27.jpg" alt="فيري">
-      <div class="overlay">
-        <span class="label">فيري</span>
-        <span class="price" id="price-25"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="26">
-      <img src="28.jpg" alt="سيف">
-      <div class="overlay">
-        <span class="label">سيف</span>
-        <span class="price" id="price-26"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="27">
-      <img src="29.jpg" alt="ليف مواعين">
-      <div class="overlay">
-        <span class="label">ليف مواعين</span>
-        <span class="price" id="price-27"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="28">
-      <img src="30.jpg" alt="علب بلاستيك ثوم ومخلل كبير">
-      <div class="overlay">
-        <span class="label">علب بلاستيك ثوم ومخلل كبير</span>
-        <span class="price" id="price-28"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="28">
-      <img src="30.jpg" alt="علب بلاستيك ثوم ومخلل صغير">
-      <div class="overlay">
-        <span class="label">علب بلاستيك ثوم ومخلل صغير</span>
-        <span class="price" id="price-28"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="29">
-      <img src="31.jpg" alt="ليمون">
-      <div class="overlay">
-        <span class="label">ليمون</span>
-        <span class="price" id="price-29"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="30">
-      <img src="32.jpg" alt="برتقال">
-      <div class="overlay">
-        <span class="label">برتقال</span>
-        <span class="price" id="price-30"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="31">
-      <img src="33.jpg" alt="دجاج">
-      <div class="overlay">
-        <span class="label">دجاج</span>
-        <span class="price" id="price-31"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="32">
-      <img src="34.jpg" alt="لحم">
-      <div class="overlay">
-        <span class="label">لحم</span>
-        <span class="price" id="price-32"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="33">
-      <img src="35.jpg" alt="شبس">
-      <div class="overlay">
-        <span class="label">شبس</span>
-        <span class="price" id="price-33"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="34">
-      <img src="36.jpg" alt="غاز">
-      <div class="overlay">
-        <span class="label">غاز</span>
-        <span class="price" id="price-34"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="icon" data-id="35">
-      <img src="37.jpg" alt="اجار شقة عامل">
-      <div class="overlay">
-        <span class="label">اجار شقة عامل</span>
-        <span class="price" id="price-35"></span>
-        <div class="quantity-controls">
-          <button class="decrement">-</button>
-          <input type="number" value="1" min="1" class="quantity-input">
-          <button class="increment">+</button>
-        </div>
-      </div>
-    </div>
+
+  <!-- الحاوية التي تحتوي على حقول الإدخال -->
+  <div class="product-input-container">
+    <input type="text" id="product-name" placeholder="اسم المنتج" class="input-field">
+    <input type="number" id="product-price" placeholder="سعر المنتج" class="input-field">
   </div>
+
   <button id="global-save" class="Btn">حفظ</button>
-  <div id="notification">تم حفظ المنتجات بنجاح</div>
+  <div id="notification">تم حفظ المنتج بنجاح</div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
-    import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
     const firebaseConfig = {
       apiKey: "AIzaSyBTkxX-GMj8GtZ-t6-626WqB5PV2AWxQS8",
       authDomain: "tshiwrmih-49a42.firebaseapp.com",
@@ -494,29 +206,12 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const db = getDatabase(app);
-    function fetchPrice(productId) {
-      const priceRef = ref(db, 'Data/' + productId);
-      get(priceRef).then((snapshot) => {
-        if(snapshot.exists()){
-          const basePrice = snapshot.val();
-          document.getElementById('price-' + productId).textContent = "السعر: " + basePrice;
-          let icon = document.querySelector('.icon[data-id="'+productId+'"]');
-          if(icon){ icon.setAttribute('data-base-price', basePrice); }
-        }
-      }).catch((error)=>{ console.error(error); });
-    }
-    for(let i = 1; i <= 35; i++){ fetchPrice(i); }
-    function updatePrice(icon) {
-      const basePrice = parseFloat(icon.getAttribute('data-base-price')) || 0;
-      const quantity = parseInt(icon.querySelector('.quantity-input').value) || 1;
-      let computedPrice = basePrice;
-      if(quantity > 1){ computedPrice = (quantity * basePrice).toFixed(2); }
-      icon.querySelector('.price').textContent = "السعر: " + computedPrice;
-    }
+
+    /* إعداد القائمة المنسدلة */
     const menuButton = document.getElementById('menu-button');
     const menuDropdown = document.getElementById('menu-dropdown');
     const loader = document.getElementById('loader');
-    menuButton.addEventListener('click', ()=>{
+    menuButton.addEventListener('click', () => {
       if(menuDropdown.style.display === "none" || menuDropdown.style.display === ""){
         menuDropdown.style.display = "block";
         loader.classList.add('stopped');
@@ -527,79 +222,40 @@
     });
     document.getElementById('record-btn').addEventListener('click', ()=>{ window.location.href = "record.html"; });
     document.getElementById('calculator-btn').addEventListener('click', ()=>{ window.location.href = "calculator.html"; });
-    const icons = document.querySelectorAll('.icon');
-    icons.forEach(icon=>{
-      icon.addEventListener('click', (e)=>{
-        if(e.target.tagName.toLowerCase() === "button" || e.target.classList.contains('quantity-input')) return;
-        icon.classList.toggle('selected');
-        const qc = icon.querySelector('.quantity-controls');
-        qc.style.display = icon.classList.contains('selected') ? "flex" : "none";
-      });
-      const increment = icon.querySelector('.increment');
-      const decrement = icon.querySelector('.decrement');
-      const input = icon.querySelector('.quantity-input');
-      let incInterval, decInterval;
-      increment.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        input.value = parseInt(input.value) + 1;
-        updatePrice(icon);
-      });
-      increment.addEventListener('mousedown', (e)=>{
-        e.stopPropagation();
-        incInterval = setInterval(()=>{
-          input.value = parseInt(input.value) + 1;
-          updatePrice(icon);
-        }, 200);
-      });
-      increment.addEventListener('mouseup', ()=>{ clearInterval(incInterval); });
-      increment.addEventListener('mouseleave', ()=>{ clearInterval(incInterval); });
-      decrement.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        if(parseInt(input.value) > 1){
-          input.value = parseInt(input.value) - 1;
-          updatePrice(icon);
-        }
-      });
-      decrement.addEventListener('mousedown', (e)=>{
-        e.stopPropagation();
-        decInterval = setInterval(()=>{
-          if(parseInt(input.value) > 1){
-            input.value = parseInt(input.value) - 1;
-            updatePrice(icon);
-          }
-        }, 200);
-      });
-      decrement.addEventListener('mouseup', ()=>{ clearInterval(decInterval); });
-      decrement.addEventListener('mouseleave', ()=>{ clearInterval(decInterval); });
-    });
-    document.getElementById('global-save').addEventListener('click', ()=>{
-      const selectedIcons = document.querySelectorAll('.icon.selected');
-      if(selectedIcons.length === 0) return;
+
+    /* حفظ بيانات المنتج إلى قاعدة البيانات مع إعادة تحميل الصفحة */
+    document.getElementById('global-save').addEventListener('click', () => {
+      const name = document.getElementById('product-name').value.trim();
+      const price = parseFloat(document.getElementById('product-price').value);
+      if(!name || isNaN(price)){
+         alert("الرجاء إدخال اسم وسعر المنتج بشكل صحيح");
+         return;
+      }
       const now = new Date();
       const today = now.getFullYear()+'/'+(now.getMonth()+1)+'/'+now.getDate();
       const currentTime = today +', '+now.toLocaleTimeString();
-      selectedIcons.forEach(icon=>{
-        const id = icon.getAttribute('data-id');
-        const name = icon.querySelector('.label').textContent;
-        const quantity = parseInt(icon.querySelector('.quantity-input').value);
-        const basePrice = parseFloat(icon.getAttribute('data-base-price')) || 0;
-        let computedPrice = basePrice;
-        if(quantity > 1){ computedPrice = parseFloat((quantity * basePrice).toFixed(2)); }
-        const prodRef = ref(db, 'Data2/' + today + '/' + id);
-        get(prodRef).then((snapshot)=>{
-          if(snapshot.exists()){
-            const existing = snapshot.val();
-            const newQty = parseInt(existing.quantity) + quantity;
-            const newPrice = parseFloat(existing.price || 0) + computedPrice;
-            update(prodRef, { quantity: newQty, price: newPrice, creationTime: currentTime });
-          } else {
-            set(prodRef, { productName: name, productId: id, quantity: quantity, price: computedPrice, creationTime: currentTime });
-          }
-        }).catch((error)=>{ console.error(error); });
+      // توليد معرف فريد باستخدام الطابع الزمني
+      const id = Date.now();
+      const prodRef = ref(db, 'Data2/' + today + '/' + id);
+      set(prodRef, {
+        productName: name,
+        productId: id,
+        quantity: 1,
+        price: price,
+        creationTime: currentTime
+      })
+      .then(() => {
+          const notification = document.getElementById('notification');
+          notification.style.display = "block";
+          setTimeout(() => {
+              notification.style.display = "none";
+              location.reload();
+          }, 3000);
+      })
+      .catch((error) => {
+          console.error(error);
+          alert("حدث خطأ أثناء حفظ المنتج");
       });
-      const notification = document.getElementById('notification');
-      notification.style.display = "block";
-      setTimeout(()=>{ notification.style.display = "none"; }, 3000);
     });
   </script>
 </body>
